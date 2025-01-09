@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://kt5bhg73f6ir"]
+
+[ext_resource type="PackedScene" uid="uid://dqrhn0d2uovua" path="res://Paddle.tscn" id="1_jg5l7"]
+[ext_resource type="PackedScene" uid="uid://syufmvg4g55h" path="res://Ball.tscn" id="2_h6j1e"]
+[ext_resource type="Script" path="res://logic/floor_celling.gd" id="3_oe7q3"]
+[ext_resource type="Script" path="res://logic/wall.gd" id="4_eiio1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0uix"]
+size = Vector2(1162, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pg0ek"]
+size = Vector2(1154, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wgu7"]
+size = Vector2(18, 642)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n7tr"]
+size = Vector2(20, 650)
+
+[node name="Main" type="Node"]
+
+[node name="Left" parent="." instance=ExtResource("1_jg5l7")]
+DEFAULT_SPEED = 1000.0
+
+[node name="Right" parent="." instance=ExtResource("1_jg5l7")]
+position = Vector2(1107, 307)
+DEFAULT_SPEED = 1000.0
+
+[node name="Ball" parent="." instance=ExtResource("2_h6j1e")]
+
+[node name="Floor" type="Area2D" parent="."]
+script = ExtResource("3_oe7q3")
+ball_direction = -1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(571, 643)
+shape = SubResource("RectangleShape2D_w0uix")
+
+[node name="Celling" type="Area2D" parent="."]
+script = ExtResource("3_oe7q3")
+ball_direction = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Celling"]
+position = Vector2(575, 0)
+shape = SubResource("RectangleShape2D_pg0ek")
+
+[node name="Left Wall" type="Area2D" parent="."]
+script = ExtResource("4_eiio1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Wall"]
+position = Vector2(-7, 319)
+shape = SubResource("RectangleShape2D_0wgu7")
+
+[node name="Right Wall" type="Area2D" parent="."]
+position = Vector2(1160, 8)
+script = ExtResource("4_eiio1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Wall"]
+position = Vector2(0, 315)
+shape = SubResource("RectangleShape2D_1n7tr")
+
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
+[connection signal="area_entered" from="Celling" to="Celling" method="_on_area_entered"]
+[connection signal="area_entered" from="Left Wall" to="Left Wall" method="_on_area_entered"]
+[connection signal="area_entered" from="Right Wall" to="Right Wall" method="_on_area_entered"]
