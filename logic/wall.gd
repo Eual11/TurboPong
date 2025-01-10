@@ -18,5 +18,5 @@ func _process(delta):
 
 
 func _on_area_entered(area):
-	if area.name == "Ball":
+	if area is Ball:
 		ball_entered.emit(player_idx, area)

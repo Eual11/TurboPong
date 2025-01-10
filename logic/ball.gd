@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Ball
 
 @export var DEFAULT_SPEED:float = 200.0
 @export var MAX_SPEED: float = 600.0
@@ -15,7 +15,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 func _physics_process(delta):
 	position+=direction*speed*delta
