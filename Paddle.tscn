@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://logic/paddle.gd" id="1_ovpev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmxuj"]
-size = Vector2(8, 32)
+size = Vector2(10, 64)
 
 [node name="Paddle" type="Area2D"]
 position = Vector2(42, 302)
 script = ExtResource("1_ovpev")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 2)
 texture = ExtResource("1_0qaog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
