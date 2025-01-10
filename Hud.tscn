@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dfa3nd4pltyas"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Player1_Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 71.0
+offset_right = -42.0
+offset_bottom = 94.0
+grow_horizontal = 2
+text = "Player 1
+"
+
+[node name="Player2_Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 21.0
+offset_top = 71.0
+offset_right = 83.0
+offset_bottom = 94.0
+grow_horizontal = 2
+text = "Player 2
+"
