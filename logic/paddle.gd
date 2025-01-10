@@ -12,6 +12,7 @@ extends Area2D
 var up_action: StringName;
 var down_action: StringName;
 var ball_direction: float;
+var direction: Vector2;
 
 
 func _ready():
@@ -32,11 +33,11 @@ func _process(delta):
 func _physics_process(delta):
 	#TODO: Paddle Boost
 	
-	var motion = Input.get_action_strength(down_action) - Input.get_action_strength(up_action)
-	position.y = clamp(position.y+motion*delta*speed, paddle_size.y/2.0, viewport_size.y-paddle_size.y/2);
+	direction.y= Input.get_action_strength(down_action) - Input.get_action_strength(up_action)
+	position.y = clamp(position.y+direction.y*delta*speed, paddle_size.y/2.0+Pong.celling_floor_size, viewport_size.y-paddle_size.y/2-Pong.celling_floor_size);
+	
 
 
 func _on_area_entered(area):
-	
 	if area.name == "Ball":
-		area.direction= Vector2(ball_direction, 0.0)
+		area.direction= Vector2(ball_direction, direction.y*0.7+area.direction.y).normalized()

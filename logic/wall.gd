@@ -1,6 +1,8 @@
 extends Area2D
 
 
+signal ball_entered(player_num:int, ball:Area2D)
+@export var player_idx=0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,5 +19,4 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.name == "Ball":
-		print("fuck")
-		area.reset(area.inital_position, Vector2(rand_choice([-1,1]),rand_choice([-1,1])))
+		ball_entered.emit(player_idx, area)

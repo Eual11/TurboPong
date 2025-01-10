@@ -27,3 +27,4 @@ func _physics_process(delta):
 func reset(pos:Vector2, dir: Vector2)->void:
 	position = pos
 	direction = dir.normalized()
+	speed = DEFAULT_SPEED
