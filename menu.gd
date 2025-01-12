@@ -1,6 +1,7 @@
 extends Control
 
-
+@onready var root:Node = get_tree().root
+@onready var current_scene:Node = root.get_child(-1)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,8 +13,9 @@ func _process(delta):
 
 
 func _on_start_pressed():
-	Pong.Main = Pong.root.get_node("Main")
-	print(Pong.root)
+	if(current_scene):
+		Pong.goto_scene(current_scene, "res://Main.tscn")
+		Pong.load_game()
 
 
 func _on_quit_pressed():
