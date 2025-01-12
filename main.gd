@@ -2,7 +2,7 @@ extends Node
 
 
 var SCORE: Vector2 = Vector2.ZERO
-@export var END_SCORE:int
+@export var END_SCORE:int =1
 @onready var viewport_rect:Rect2=get_viewport().get_visible_rect()
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -24,23 +24,42 @@ func _ready():
 	Player2_Score_Label.position = Vector2(viewport_rect.size.x/2.0+32, 36)
 	Pong.Ball = $Ball
 	Pong.GAME_RUNNING = true
+	
+	#Connections to signal Bus
+
+	SignalBus.button_pressed.connect(button_press_handler)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func player_scored(player_idx:int, ball:Area2D):
-	SCORE[1-player_idx]+=1
-	$HUD.get_child(0).text = str(SCORE[0])
-	$HUD.get_child(1).text = str(SCORE[1])
-	
-	if(SCORE[player_idx]==END_SCORE):
-		player_wins(player_idx)
-	elif(SCORE[1-player_idx] == END_SCORE):
-		player_wins(1-player_idx)
+func player_scored(player_idx:int, ball:Ball):
+	SCORE[1-player_idx]+=1	
+	update_score()
+	if(SCORE[1-player_idx]>=END_SCORE):
+		player_wins((2-player_idx))
 	else:
 		ball.reset(ball.inital_position, Vector2(1 if player_idx==0 else -1, randf_range(-1,1)))
 func player_wins(idx:int):
-	$EndGame.update_win_label("Player "+str(idx)+"Wins")
+	$EndGame.update_win_label("Player "+str(idx)+" Wins")
 	$EndGame.show()
 	Pong.GAME_RUNNING = false
+
+func reset_game():
+	#Resting Player score
+	SCORE = Vector2(0.0, 0.0)
+	#hide Game end layer
+	$EndGame.hide()
+	update_score()
+	$Ball.reset($Ball.inital_position, Vector2((randi()%2+1), randf_range(-1.0, 1.0)))
+
+func update_score():
+	$HUD.get_child(0).text = str(SCORE[0])
+	$HUD.get_child(1).text = str(SCORE[1])
+func button_press_handler(button_name:StringName):
+	if button_name == "endgame_restart":
+		Pong.GAME_RUNNING = true
+		reset_game()
+	elif button_name == "endgame_menu":
+		pass

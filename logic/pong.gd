@@ -47,4 +47,5 @@ func _defered_goto_scene(path:String)->bool:
 	
 
 func button_press_handler(btn_name:StringName)->void:
-	print(btn_name)
+	if btn_name == "endgame_menu":
+		goto_scene(get_tree().root.get_child(-1), "res://Menu.tscn")

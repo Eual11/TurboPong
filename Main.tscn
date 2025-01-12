@@ -24,6 +24,7 @@ size = Vector2(20, 650)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8nhb2")
+END_SCORE = 0
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
