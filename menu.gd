@@ -15,7 +15,6 @@ func _process(delta):
 func _on_start_pressed():
 	if(current_scene):
 		Pong.goto_scene(current_scene, "res://Main.tscn")
-		Pong.load_game()
 
 
 func _on_quit_pressed():
