@@ -18,6 +18,8 @@ func _ready():
 func _process(_delta):
 	pass
 func _physics_process(delta):
+	if not Pong.GAME_RUNNING:
+		return
 	position+=direction*speed*delta
 	if(speed < MAX_SPEED):
 		speed+=accelaration*delta
