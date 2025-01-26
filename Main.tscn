@@ -1,14 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://kt5bhg73f6ir"]
+[gd_scene load_steps=17 format=3 uid="uid://kt5bhg73f6ir"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8nhb2"]
 [ext_resource type="PackedScene" uid="uid://dqrhn0d2uovua" path="res://Paddle.tscn" id="1_jg5l7"]
 [ext_resource type="Script" path="res://separator.gd" id="2_1guod"]
+[ext_resource type="Texture2D" uid="uid://crf1idx37474d" path="res://assets/img/Neon/Background Empty.png" id="2_4obww"]
 [ext_resource type="PackedScene" uid="uid://syufmvg4g55h" path="res://Ball.tscn" id="2_h6j1e"]
 [ext_resource type="Script" path="res://logic/floor_celling.gd" id="3_oe7q3"]
 [ext_resource type="Script" path="res://logic/wall.gd" id="4_eiio1"]
 [ext_resource type="Texture2D" uid="uid://b0hx7462dogqc" path="res://assets/img/separator.png" id="5_0tin7"]
 [ext_resource type="PackedScene" uid="uid://dfa3nd4pltyas" path="res://Hud.tscn" id="6_dvlcu"]
 [ext_resource type="PackedScene" uid="uid://ceelknk081ptc" path="res://EndGame.tscn" id="8_ggnqi"]
+[ext_resource type="AudioStream" uid="uid://b5nsrkojmnnkr" path="res://assets/sound/player_hit_wall.wav" id="12_73rg8"]
+[ext_resource type="AudioStream" uid="uid://curd8u08l1rdl" path="res://assets/sound/player_out_score.wav" id="12_tr5vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0uix"]
 size = Vector2(1157, 16)
@@ -24,15 +27,15 @@ size = Vector2(20, 650)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8nhb2")
-END_SCORE = 0
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.141176, 0.152941, 0.164706, 1)
+texture = ExtResource("2_4obww")
+region_rect = Rect2(84.609, 77.4711, 1108.06, 559.833)
 
 [node name="Separator" type="Sprite2D" parent="."]
 position = Vector2(582.5, 319.5)
@@ -50,7 +53,6 @@ modulate = Color(0, 1, 1, 1)
 position = Vector2(1107, 307)
 DEFAULT_SPEED = 1000.0
 diff = 0.5
-PLAYER_AI = true
 
 [node name="Ball" parent="." instance=ExtResource("2_h6j1e")]
 position = Vector2(576, 315)
@@ -62,6 +64,7 @@ script = ExtResource("3_oe7q3")
 ball_direction = -1.0
 
 [node name="ColorRect" type="ColorRect" parent="Floor"]
+visible = false
 offset_top = 632.0
 offset_right = 1170.0
 offset_bottom = 648.0
@@ -75,6 +78,7 @@ script = ExtResource("3_oe7q3")
 ball_direction = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="Celling"]
+visible = false
 offset_right = 1170.0
 offset_bottom = 16.0
 
@@ -102,6 +106,13 @@ shape = SubResource("RectangleShape2D_1n7tr")
 
 [node name="EndGame" parent="." instance=ExtResource("8_ggnqi")]
 visible = false
+
+[node name="PlayerScore" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_tr5vk")
+volume_db = 3.962
+
+[node name="BallHitWall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_73rg8")
 
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_entered" from="Celling" to="Celling" method="_on_area_entered"]

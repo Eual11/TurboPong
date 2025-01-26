@@ -2,7 +2,7 @@ extends Node
 
 
 var SCORE: Vector2 = Vector2.ZERO
-@export var END_SCORE:int =1
+@export var END_SCORE:int =3
 @onready var viewport_rect:Rect2=get_viewport().get_visible_rect()
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -20,8 +20,8 @@ func _ready():
 	p2_wall.ball_entered.connect(player_scored)
 	$HUD.get_child(0).text ="0"
 	$HUD.get_child(1).text ="0"
-	Player1_Score_Label.position = Vector2(viewport_rect.size.x/2.0-36, 36)
-	Player2_Score_Label.position = Vector2(viewport_rect.size.x/2.0+32, 36)
+	Player1_Score_Label.position = Vector2(viewport_rect.size.x/2.0-64, 36)
+	Player2_Score_Label.position = Vector2(viewport_rect.size.x/2.0+64-Player1_Score_Label.size.x/2, 36)
 	Pong.Ball = $Ball
 	Pong.GAME_RUNNING = true
 	
@@ -35,11 +35,14 @@ func _process(delta):
 	pass
 
 func player_scored(player_idx:int, ball:Ball):
+	$PlayerScore.play()
+	ball.hide()
 	SCORE[1-player_idx]+=1	
 	update_score()
 	if(SCORE[1-player_idx]>=END_SCORE):
 		player_wins((2-player_idx))
 	else:
+		ball.show()
 		ball.reset(ball.inital_position, Vector2(1 if player_idx==0 else -1, randf_range(-1,1)))
 func player_wins(idx:int):
 	$EndGame.update_win_label("Player "+str(idx)+" Wins")
@@ -63,3 +66,8 @@ func button_press_handler(button_name:StringName):
 		reset_game()
 	elif button_name == "endgame_menu":
 		pass
+func init(parms: Dictionary)->void:
+	if 	parms.has("player2_ai"):
+		$Right.PLAYER_AI = parms["player2_ai"]
+	if parms.has("win_score"):
+		END_SCORE = parms['win_score']
