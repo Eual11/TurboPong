@@ -16,4 +16,4 @@ func _on_area_entered(area):
 	if area is Ball:
 		#reflecting the ball with some randomness
 		area.direction = (reflect(Vector2(0.0, ball_direction), area.direction)+Vector2(randf_range(-0.04, 0.04), randf_range(-0.04, 0.04))).normalized()
-		
+		get_parent().get_node("BallHitWall").play()

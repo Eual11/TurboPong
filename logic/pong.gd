@@ -23,21 +23,24 @@ var GAME_RUNNING = false;
 func _ready():
 	SignalBus.button_pressed.connect(button_press_handler)
 	
-func goto_scene(current_scene:Node, path:String):
-	if(_defered_goto_scene(path)):
+func goto_scene(current_scene:Node, path:String, params:Dictionary ={}):
+	if(_defered_goto_scene(path, params)):
 		current_scene.queue_free()
 	else:
 		print("Couldn't path given or null current_scene")
 		
 	
-func _defered_goto_scene(path:String)->bool:
+func _defered_goto_scene(path:String, params:Dictionary = {})->bool:
 	
 	var s:PackedScene = ResourceLoader.load(path)
 	
 	if not s:
 		return false
 	var new_scene = s.instantiate()
-	
+	#initializing new scene
+	if(new_scene.has_method("init")):
+		new_scene.init(params)
+
 	if not new_scene:
 		return false
 	get_tree().root.add_child(new_scene)

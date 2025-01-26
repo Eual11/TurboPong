@@ -8,7 +8,7 @@ extends Area2D
 @export var diff =0.1;
 
 # Player and AI 
-@export var PLAYER_AI:bool = false
+var PLAYER_AI:bool = false
 
 var frame =0;
 
@@ -55,6 +55,7 @@ func _physics_process(delta):
 func _on_area_entered(area):
 	if area is Ball:
 		area.direction= Vector2(ball_direction, direction.y*0.7+area.direction.y).normalized()
+		$PlayerHitBall.play()
 func move_AI(delta:float):
 	#if there is no ball do nothing
 	if not Pong.Ball:
