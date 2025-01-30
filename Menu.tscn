@@ -1,0 +1,149 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsio1v82i6dqc"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_e203h"]
+[ext_resource type="Texture2D" uid="uid://clk8v7rdn5q6g" path="res://assets/img/Neon/BG_Pong.png" id="2_py081"]
+[ext_resource type="FontFile" uid="uid://bavoobltgr2r5" path="res://assets/fonts/Micro5-Regular.ttf" id="2_wlbm3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0idx6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs5fq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_k2uk8"]
+font = ExtResource("2_wlbm3")
+font_size = 112
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e203h")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_py081")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+offset_left = -139.5
+offset_top = -101.5
+offset_right = 139.5
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Win_Cond" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Wi1" type="Button" parent="VBoxContainer/Win_Cond"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Win in 1
+"
+
+[node name="Wi3" type="Button" parent="VBoxContainer/Win_Cond"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Win in 3
+"
+
+[node name="Wi7" type="Button" parent="VBoxContainer/Win_Cond"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Win in 7"
+
+[node name="Back" type="Button" parent="VBoxContainer/Win_Cond"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Back"
+
+[node name="Play_Select" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="OnePlayer" type="Button" parent="VBoxContainer/Play_Select"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "One Player"
+
+[node name="TwoPlayers" type="Button" parent="VBoxContainer/Play_Select"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Two Players
+"
+
+[node name="Spectate" type="Button" parent="VBoxContainer/Play_Select"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Spectate "
+
+[node name="Quit" type="Button" parent="VBoxContainer/Play_Select"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wlbm3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_0idx6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rs5fq")
+text = "Quit
+"
+
+[node name="PONG" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.398
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -43.452
+offset_right = 81.5
+offset_bottom = 3.452
+grow_horizontal = 2
+grow_vertical = 2
+text = "PONG"
+label_settings = SubResource("LabelSettings_k2uk8")
+
+[connection signal="pressed" from="VBoxContainer/Win_Cond/Wi1" to="." method="_on_wi_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Win_Cond/Wi3" to="." method="_on_wi_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Win_Cond/Wi7" to="." method="_on_wi_7_pressed"]
+[connection signal="pressed" from="VBoxContainer/Win_Cond/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play_Select/OnePlayer" to="." method="_on_one_player_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play_Select/TwoPlayers" to="." method="_on_two_players_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play_Select/Spectate" to="." method="_on_spectate_pressed"]
+[connection signal="pressed" from="VBoxContainer/Play_Select/Quit" to="." method="_on_quit_pressed"]

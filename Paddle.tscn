@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqrhn0d2uovua"]
+
+[ext_resource type="Script" path="res://logic/paddle.gd" id="1_ovpev"]
+[ext_resource type="Texture2D" uid="uid://mex715npsw2c" path="res://assets/img/Neon/Paddle_1.png" id="2_dmkv1"]
+[ext_resource type="AudioStream" uid="uid://c814hrc2orqkh" path="res://assets/sound/ball_hit_paddle/ball_hit_paddle_02.wav" id="3_a1dea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmxuj"]
+size = Vector2(15, 106)
+
+[node name="Paddle" type="Area2D"]
+position = Vector2(42, 302)
+script = ExtResource("1_ovpev")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dmkv1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_kmxuj")
+
+[node name="PlayerHitBall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a1dea")
+volume_db = 6.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

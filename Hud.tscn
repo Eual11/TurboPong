@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfa3nd4pltyas"]
+
+[ext_resource type="FontFile" uid="uid://bavoobltgr2r5" path="res://assets/fonts/Micro5-Regular.ttf" id="1_p7xoj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b6y4f"]
+font = ExtResource("1_p7xoj")
+font_size = 64
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Player1_Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -3.0
+offset_top = 9.0
+offset_right = 20.0
+offset_bottom = 74.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_b6y4f")
+
+[node name="Player2_Score" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.0
+offset_top = 9.0
+offset_right = -98.0
+offset_bottom = 74.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_b6y4f")
