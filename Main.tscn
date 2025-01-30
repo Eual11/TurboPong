@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b0hx7462dogqc" path="res://assets/img/separator.png" id="5_0tin7"]
 [ext_resource type="PackedScene" uid="uid://dfa3nd4pltyas" path="res://Hud.tscn" id="6_dvlcu"]
 [ext_resource type="PackedScene" uid="uid://ceelknk081ptc" path="res://EndGame.tscn" id="8_ggnqi"]
-[ext_resource type="AudioStream" uid="uid://b5nsrkojmnnkr" path="res://assets/sound/player_hit_wall.wav" id="12_73rg8"]
+[ext_resource type="AudioStream" uid="uid://dvpp1wkvkp6cs" path="res://assets/sound/ball_hit_paddle/ball_hit_paddle_10.wav" id="12_b05ab"]
 [ext_resource type="AudioStream" uid="uid://curd8u08l1rdl" path="res://assets/sound/player_out_score.wav" id="12_tr5vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0uix"]
@@ -56,8 +56,8 @@ diff = 0.5
 
 [node name="Ball" parent="." instance=ExtResource("2_h6j1e")]
 position = Vector2(576, 315)
-MAX_SPEED = 1000.0
-accelaration = 20.0
+MAX_SPEED = 1500.0
+accelaration = 50.0
 
 [node name="Floor" type="Area2D" parent="."]
 script = ExtResource("3_oe7q3")
@@ -112,7 +112,8 @@ stream = ExtResource("12_tr5vk")
 volume_db = 3.962
 
 [node name="BallHitWall" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_73rg8")
+stream = ExtResource("12_b05ab")
+volume_db = 4.0
 
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_entered" from="Celling" to="Celling" method="_on_area_entered"]

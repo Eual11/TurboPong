@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://logic/paddle.gd" id="1_ovpev"]
 [ext_resource type="Texture2D" uid="uid://mex715npsw2c" path="res://assets/img/Neon/Paddle_1.png" id="2_dmkv1"]
-[ext_resource type="AudioStream" uid="uid://8laimoqu0qrm" path="res://assets/sound/ball_hit_player.wav" id="3_lfhag"]
+[ext_resource type="AudioStream" uid="uid://c814hrc2orqkh" path="res://assets/sound/ball_hit_paddle/ball_hit_paddle_02.wav" id="3_a1dea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmxuj"]
 size = Vector2(15, 106)
@@ -19,6 +19,7 @@ position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_kmxuj")
 
 [node name="PlayerHitBall" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_lfhag")
+stream = ExtResource("3_a1dea")
+volume_db = 6.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

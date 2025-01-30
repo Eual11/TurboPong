@@ -69,5 +69,7 @@ func button_press_handler(button_name:StringName):
 func init(parms: Dictionary)->void:
 	if 	parms.has("player2_ai"):
 		$Right.PLAYER_AI = parms["player2_ai"]
+	if parms.has("player1_ai"):
+		$Left.PLAYER_AI = parms["player1_ai"]
 	if parms.has("win_score"):
 		END_SCORE = parms['win_score']

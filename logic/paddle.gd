@@ -5,7 +5,7 @@ extends Area2D
 @export var DEFAULT_SPEED = 100.0
 # modified for balls velocity 
 @export var DEFAULT_BOUNCE = 1.0
-@export var diff =0.1;
+@export var diff =0.01;
 
 # Player and AI 
 var PLAYER_AI:bool = false
@@ -60,7 +60,6 @@ func move_AI(delta:float):
 	#if there is no ball do nothing
 	if not Pong.Ball:
 		return
-	#put the AI to sleep if the ball isn't in the incoming direction
 	if(sign(Pong.Ball.direction.x) == sign(ball_direction)):
 		return
 	var ball_pos:Vector2 = Pong.Ball.position

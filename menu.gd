@@ -4,15 +4,14 @@ extends Control
 @onready var current_scene:Node = root.get_child(-1)
 var WIN_SCORE: int;
 var PLAYER2_AI: bool
+var PLAYER1_AI: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
 
 func _on_start_pressed():
 	$VBoxContainer/OnePlayer.hide()
@@ -50,7 +49,7 @@ func _on_two_players_pressed():
 
 func play_game():
 	if(current_scene):
-		Pong.goto_scene(current_scene, "res://Main.tscn", {"player2_ai": PLAYER2_AI, "win_score":WIN_SCORE})
+		Pong.goto_scene(current_scene, "res://Main.tscn", {"player1_ai":PLAYER1_AI,"player2_ai": PLAYER2_AI, "win_score":WIN_SCORE})
 
 func _on_wi_1_pressed():
 	WIN_SCORE =1 
@@ -69,3 +68,10 @@ func _on_wi_7_pressed():
 func _on_back_pressed():
 	toggle_play_select(true)
 	toggle_win_cond(false)
+
+
+func _on_spectate_pressed():
+	PLAYER2_AI = true 
+	PLAYER1_AI = true
+	toggle_play_select(false)
+	toggle_win_cond(true)
